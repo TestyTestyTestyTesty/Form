@@ -8,7 +8,34 @@
     <link rel="stylesheet" href="./styles/main.scss" />
 </head>
 <body>
-    <h1>my page</h1>
+    <form class="form">
+        <div class="form__wrapper">
+            <div class="form__errors"></div>
+            <div class="form__row">
+                <label class="form__label" for="first-name">First name:</label>
+                <input class="form__input" type="text" name="first-name" id="first-name" placeholder="First name">
+            </div>
+            <div class="form__row">
+                <label class="form__label" for="last-name">Last Name:</label>
+                <input class="form__input" type="text" name="last-name" id="last-name" placeholder="Last name">
+            </div>
+            <div class="form__row">
+                <label class="form__label" for="pesel">PESEL:</label>
+                <input class="form__input" type="number" name="pesel" id="pesel" placeholder="Your PESEL">
+            </div>
+            <div class="form__row">
+                <label class="form__label" for="phone">Your phone number:</label>
+                <input class="form__input" type="tel" name="phone" id="phone" placeholder="Your phone number">
+            </div>
+            <div class="form__row">
+                <label class="form__label" for="password">Your password:</label>
+                <input class="form__input" type="password" name="password" id="password" placeholder="Your password">
+            </div>
+            <div class="form__row"></div>
+                <input class="form__submit" type="submit" value="Submit">
+            </div>
+        </div>
+      </form>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
