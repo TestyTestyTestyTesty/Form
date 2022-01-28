@@ -2,18 +2,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
   formSubmit();
   function formSubmit() {
     const form = document.querySelector(".form");
+    const regExp = /[a-zA-Z]/g;
     if (form) {
-      const peselRegex = new RegExp("^d{11}$");
       let errors = form.querySelector(".form__errors");
       form.addEventListener("submit", function (e) {
+        e.preventDefault();
         let firstName = form.querySelector("#first-name").value;
         let lastName = form.querySelector("#last-name").value.trim();
         let pesel = form.querySelector("#pesel").value.trim();
+        let phoneCode = form.querySelector("#phone-codes").value;
         let phone = form.querySelector("#phone").value.trim();
         let password = form.querySelector("#password").value.trim();
         let messages = [];
         errors.innerHTML = "";
-        e.preventDefault();
 
         if (firstName === "" || firstName === null) {
           messages.push("First name is required");
@@ -28,7 +29,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         if (phone === "" || phone === null) {
           messages.push("Phone is required");
+        } else if (regExp.test(phone)) {
+          messages.push("Invalid phone number");
         }
+
         if (password === "" || password === null) {
           messages.push("Password is required");
         } else if (password.length < 6) {
@@ -41,6 +45,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
           paragraph.innerHTML = message;
           errors.appendChild(paragraph);
         });
+        if (messages.length === 0) {
+            alert(`
+            First name: ${firstName}, 
+            last name: ${lastName}, 
+            PESEL: ${pesel}, 
+            phone: ${phoneCode} ${phone}, 
+            password: ${password}`)
+        }
       });
     }
   }
