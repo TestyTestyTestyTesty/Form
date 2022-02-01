@@ -1,39 +1,38 @@
 window.addEventListener("DOMContentLoaded", (event) => {
-  formSubmit();
-  function formSubmit() {
+  
+  const formSubmit = () => {
     const form = document.querySelector(".form");
-    const regExp = /[a-zA-Z]/g;
+    const phoneRegex = /[a-zA-Z]/g;
     if (form) {
-      let errors = form.querySelector(".form__errors");
-      form.addEventListener("submit", function (e) {
+      const errors = form.querySelector(".form__errors");
+      form.addEventListener("submit", e => {
         e.preventDefault();
-        let firstName = form.querySelector("#first-name").value;
-        let lastName = form.querySelector("#last-name").value.trim();
-        let pesel = form.querySelector("#pesel").value.trim();
-        let phoneCode = form.querySelector("#phone-codes").value;
-        let phone = form.querySelector("#phone").value.trim();
-        let password = form.querySelector("#password").value.trim();
-        let messages = [];
+        const firstName = form.querySelector("#first-name").value.trim();
+        const lastName = form.querySelector("#last-name").value.trim();
+        const pesel = form.querySelector("#pesel").value.trim();
+        const phoneCode = form.querySelector("#phone-codes").value;
+        const phone = form.querySelector("#phone").value.trim();
+        const password = form.querySelector("#password").value.trim();
+        const messages = [];
         errors.innerHTML = "";
-
-        if (firstName === "" || firstName === null) {
+        if (!firstName) {
           messages.push("First name is required");
         }
-        if (lastName === "" || lastName === null) {
+        if (!lastName) {
           messages.push("Last name is required");
         }
-        if (pesel === "" || pesel === null) {
+        if (!pesel) {
           messages.push("PESEL is required");
         } else if (pesel.length !== 11) {
           messages.push("invalid PESEL length");
         }
-        if (phone === "" || phone === null) {
+        if (!phone) {
           messages.push("Phone is required");
-        } else if (regExp.test(phone)) {
+        } else if (phoneRegex.test(phone)) {
           messages.push("Invalid phone number");
         }
 
-        if (password === "" || password === null) {
+        if (!password) {
           messages.push("Password is required");
         } else if (password.length < 6) {
           messages.push("Password is too short");
@@ -41,19 +40,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
           messages.push("Password is too long");
         }
         messages.forEach((message) => {
-          const paragraph = document.createElement("p");
-          paragraph.innerHTML = message;
+          const paragraph = document.createElement("li");
+          paragraph.textContent = message;
           errors.appendChild(paragraph);
         });
-        if (messages.length === 0) {
-            alert(`
+        if (!messages.length) {
+          alert(`
             First name: ${firstName}, 
             last name: ${lastName}, 
             PESEL: ${pesel}, 
             phone: ${phoneCode} ${phone}, 
-            password: ${password}`)
+            password: ${password}`);
         }
       });
     }
-  }
+  };
+  formSubmit();
 });
